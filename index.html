@@ -10,8 +10,8 @@
 <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
   :root{
-    --maroon:#7d1a2a;
-    --maroon-dark:#4a0e18;
+    --maroon:#e2001a;
+    --maroon-dark:#7a000f;
     --paper:#f6f0e3;
     --paper-dim:#efe4cd;
     --ink:#241f1a;
@@ -52,15 +52,33 @@
     backdrop-filter:blur(6px);
     border-bottom:1px solid var(--line);
   }
-  .tracker .mark{font-family:'EB Garamond',serif; font-style:italic; text-transform:none; font-size:15px;}
-  .tracker .dots{display:flex; gap:14px;}
-  .tracker .dot-group{display:flex; align-items:center; gap:5px; cursor:pointer; opacity:0.45; transition:opacity .25s;}
-  .tracker .dot-group.active{opacity:1;}
-  .tracker .dot-group span.label{display:none;}
-  .tracker .bullets{display:flex; gap:3px;}
-  .tracker .bullets i{width:5px; height:5px; border-radius:50%; background:var(--ink-soft); display:inline-block;}
-  .tracker .dot-group.active .bullets i.filled{background:var(--maroon);}
-  @media (min-width:720px){ .tracker .dot-group span.label{display:inline;} }
+  .tracker .logo{ display:flex; align-items:center; color:var(--maroon); }
+  .tracker .logo svg{ width:22px; height:22px; display:block; }
+
+  .tracker-progress{
+    display:flex;
+    flex-direction:column;
+    align-items:flex-end;
+    gap:6px;
+  }
+  .tracker-progress .caption{
+    font-family:'EB Garamond',serif;
+    font-style:italic;
+    text-transform:none;
+    letter-spacing:0;
+    font-size:13px;
+    color:var(--ink-soft);
+  }
+  .tracker-progress .bullets{ display:flex; gap:5px; }
+  .tracker-progress .bullets i{
+    width:6px; height:6px;
+    border-radius:50%;
+    background:var(--line);
+    display:inline-block;
+    cursor:pointer;
+    transition:background .3s;
+  }
+  .tracker-progress .bullets i.filled{ background:var(--maroon); }
 
   section{
     max-width:760px;
@@ -84,12 +102,21 @@
     position:relative;
     z-index:2;
   }
-  .hero .eyebrow{
-    font-size:13px;
-    letter-spacing:0.18em;
+  .hero .affil{ margin:0 0 20px; }
+  .hero .affil-line{ margin:0 0 3px; line-height:1.3; }
+  .hero .affil-line .what{
+    font-family:'Inter',sans-serif;
+    font-size:12px;
+    letter-spacing:0.1em;
     text-transform:uppercase;
     color:#e7c9a9;
-    margin:0 0 18px;
+  }
+  .hero .affil-line .where{
+    font-family:'EB Garamond',serif;
+    font-style:italic;
+    font-size:17px;
+    color:#f6ecdc;
+    margin-left:8px;
   }
   .hero h1{
     font-size:clamp(40px,7vw,64px);
@@ -147,12 +174,8 @@
     gap:12px;
     margin-bottom:34px;
   }
-  .kicker .num{
-    font-family:'EB Garamond',serif;
-    font-style:italic;
-    color:var(--gold);
-    font-size:15px;
-  }
+  .kicker .arrow{ flex-shrink:0; display:block; }
+  .kicker .arrow line{ stroke:var(--maroon); stroke-width:2; }
   .kicker h2{
     font-size:28px;
     margin:0;
@@ -229,21 +252,42 @@
 </head>
 <body>
 
+<svg width="0" height="0" style="position:absolute;overflow:hidden;">
+  <defs>
+    <marker id="arrowhead-red" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
+      <path d="M0,0 L6,3 L0,6 Z" fill="#e2001a"/>
+    </marker>
+  </defs>
+</svg>
+
 <nav class="tracker">
-  <span class="mark">S. Marrone</span>
-  <div class="dots" id="tracker-dots">
-    <!-- filled via JS -->
+  <a class="logo" href="#s0" aria-label="Home">
+    <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <line x1="4" y1="4" x2="20" y2="20" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
+      <line x1="20" y1="4" x2="4" y2="20" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
+      <line x1="8.5" y1="8.5" x2="11.5" y2="5.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
+      <line x1="15.5" y1="8.5" x2="12.5" y2="5.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
+      <circle cx="4" cy="4" r="1.6" fill="currentColor"/>
+      <circle cx="20" cy="4" r="1.6" fill="currentColor"/>
+    </svg>
+  </a>
+  <div class="tracker-progress">
+    <span class="caption" id="tracker-caption">Home</span>
+    <div class="bullets" id="tracker-bullets"><!-- filled via JS --></div>
   </div>
 </nav>
 
 <header class="hero" id="s0">
   <div class="hero-inner">
-    <p class="eyebrow">Università Federico II di Napoli · Scuola Superiore Meridionale</p>
+    <div class="affil">
+      <p class="affil-line"><span class="what">Bachelor's degree</span><span class="where">Università degli Studi di Napoli Federico II</span></p>
+      <p class="affil-line"><span class="what">Advanced Programme</span><span class="where">Scuola Superiore Meridionale</span></p>
+    </div>
     <h1>Stefano Marrone</h1>
-    <p class="role">Bachelor's student in Mathematics</p>
+    <p class="role">Mathematician</p>
     <p class="lede">Working towards an academic career in pure mathematics, with a growing interest in category theory, topology, algebra, and mathematical logic.</p>
     <div class="cta-row">
-      <a class="cta solid" href="#contact">Get in touch</a>
+      <a class="cta solid" href="works.html">I miei lavori</a>
       <a class="cta" href="mailto:m.arste@outlook.com">m.arste@outlook.com</a>
     </div>
   </div>
@@ -280,7 +324,7 @@
 </header>
 
 <section id="s1">
-  <div class="kicker"><span class="num">01</span><h2>About</h2></div>
+  <div class="kicker"><svg class="arrow" viewBox="0 0 52 14" width="48" height="14"><line x1="0" y1="7" x2="42" y2="7" marker-end="url(#arrowhead-red)"/></svg><h2>About</h2></div>
   <div class="prose fade-in">
     <p>I'm a <strong>Bachelor's student in Mathematics</strong> at the Università degli Studi di Napoli Federico II, concurrently enrolled in the Advanced Programme in Mathematics, Physics and Engineering at the <strong>Scuola Superiore Meridionale</strong>. My thesis work looks at <strong>category theory and topos theory</strong> — from the classical notions of categories and functors to naturality, universality, and elementary topoi.</p>
     <p>Born in 2004 in Giugliano in Campania, near Naples. Outside of coursework I play piano and guitar, and volunteer occasionally in local community events.</p>
@@ -288,7 +332,7 @@
 </section>
 
 <section id="s2">
-  <div class="kicker"><span class="num">02</span><h2>Education</h2></div>
+  <div class="kicker"><svg class="arrow" viewBox="0 0 52 14" width="48" height="14"><line x1="0" y1="7" x2="42" y2="7" marker-end="url(#arrowhead-red)"/></svg><h2>Education</h2></div>
   <ul class="entries fade-in">
     <li>
       <div class="when">2023 – present</div>
@@ -315,7 +359,7 @@
 </section>
 
 <section id="s3">
-  <div class="kicker"><span class="num">03</span><h2>Experience &amp; Honours</h2></div>
+  <div class="kicker"><svg class="arrow" viewBox="0 0 52 14" width="48" height="14"><line x1="0" y1="7" x2="42" y2="7" marker-end="url(#arrowhead-red)"/></svg><h2>Experience &amp; Honours</h2></div>
   <ul class="entries fade-in">
     <li>
       <div class="when">2025</div>
@@ -342,7 +386,7 @@
 </section>
 
 <section id="s4">
-  <div class="kicker"><span class="num">04</span><h2>Skills &amp; Languages</h2></div>
+  <div class="kicker"><svg class="arrow" viewBox="0 0 52 14" width="48" height="14"><line x1="0" y1="7" x2="42" y2="7" marker-end="url(#arrowhead-red)"/></svg><h2>Skills &amp; Languages</h2></div>
   <div class="grid-two fade-in">
     <div>
       <h3 style="margin:0 0 10px;font-size:17px;">Technical</h3>
@@ -362,7 +406,7 @@
 </section>
 
 <section id="contact">
-  <div class="kicker"><span class="num">05</span><h2>Contact</h2></div>
+  <div class="kicker"><svg class="arrow" viewBox="0 0 52 14" width="48" height="14"><line x1="0" y1="7" x2="42" y2="7" marker-end="url(#arrowhead-red)"/></svg><h2>Contact</h2></div>
   <div class="prose fade-in">
     <p>Based in <strong>Naples, Italy</strong>. Reach me by email or phone:</p>
     <p>Email: <a href="mailto:m.arste@outlook.com">m.arste@outlook.com</a><br>
@@ -378,39 +422,29 @@
 <script>
   const sections = ['s0','s1','s2','s3','s4','contact'];
   const labels = ['Home','About','Education','Experience','Skills','Contact'];
-  const dotsWrap = document.getElementById('tracker-dots');
+  const bulletsWrap = document.getElementById('tracker-bullets');
+  const caption = document.getElementById('tracker-caption');
+  const dots = [];
 
   sections.forEach((id, i) => {
-    const group = document.createElement('a');
-    group.href = '#' + id;
-    group.className = 'dot-group';
-    group.dataset.id = id;
-    group.style.textDecoration = 'none';
-    group.style.color = 'inherit';
-
-    const bullets = document.createElement('span');
-    bullets.className = 'bullets';
-    sections.forEach((_, j) => {
-      const dot = document.createElement('i');
-      if (j <= i) dot.classList.add('filled');
-      bullets.appendChild(dot);
+    const dot = document.createElement('i');
+    dot.addEventListener('click', () => {
+      document.getElementById(id).scrollIntoView({ behavior: 'smooth' });
     });
-
-    const label = document.createElement('span');
-    label.className = 'label';
-    label.textContent = labels[i];
-
-    group.appendChild(bullets);
-    group.appendChild(label);
-    dotsWrap.appendChild(group);
+    dots.push(dot);
+    bulletsWrap.appendChild(dot);
   });
 
-  const groups = document.querySelectorAll('.dot-group');
+  function setActive(idx){
+    caption.textContent = labels[idx];
+    dots.forEach((d, i) => d.classList.toggle('filled', i <= idx));
+  }
+  setActive(0);
+
   const observer = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
       if (entry.isIntersecting) {
-        const idx = sections.indexOf(entry.target.id);
-        groups.forEach((g, i) => g.classList.toggle('active', i === idx));
+        setActive(sections.indexOf(entry.target.id));
       }
     });
   }, { rootMargin: '-40% 0px -55% 0px' });
