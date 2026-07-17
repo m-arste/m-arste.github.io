@@ -92,8 +92,30 @@
     background:linear-gradient(180deg, var(--maroon) 0%, var(--maroon-dark) 100%);
     color:var(--paper);
     max-width:none;
-    padding:170px 28px 90px;
+    padding:170px 28px 150px;
     position:relative;
+    overflow:visible;
+  }
+
+  /* transition layers: the diagram fades behind the dark gradient and the paper curtain */
+  .hero::before,
+  .hero::after{
+    content:"";
+    position:absolute;
+    left:0;
+    right:0;
+    pointer-events:none;
+    z-index:4;
+  }
+  .hero::before{
+    bottom:-1px;
+    height:220px;
+    background:linear-gradient(to bottom, rgba(0,0,0,0) 0%, rgba(0,0,0,.58) 62%, rgba(0,0,0,.9) 100%);
+  }
+  .hero::after{
+    bottom:-150px;
+    height:170px;
+    background:linear-gradient(to bottom, rgba(246,240,227,0) 0%, var(--paper) 32%, var(--paper) 100%);
   }
   .hero-inner{
     max-width:900px;
@@ -176,14 +198,14 @@
   @media (max-width:900px){
     .diagram-col{ width:260px; margin-top:20px; align-self:center; }
   }
-  /* diagram stays pinned in place, dissolving in as the page scrolls beneath it */
+  /* diagram stays pinned and visible on Home, then dissolves behind the transition layers */
   @media (min-width:901px){
     .diagram-col{
       position:fixed;
       top:50%;
       right:max(28px, calc((100vw - 900px)/2 + 8px));
       transform:translateY(-50%);
-      opacity:0;
+      opacity:1;
       transition:opacity .12s linear;
       z-index:3;
       pointer-events:none;
@@ -502,8 +524,8 @@
   }, { threshold: 0.15 });
   fadeEls.forEach(el => fadeObserver.observe(el));
 
-  // diagram: stays pinned on screen while the hero scrolls past underneath it,
-  // dissolving in as the user scrolls, then dissolving back out once the hero has gone by
+  // diagram: visible immediately and for the whole Home section;
+  // it fades out only near the transition, behind the dark gradient and paper curtain
   const diagram = document.querySelector('.diagram-col');
   const hero = document.getElementById('s0');
   const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -511,11 +533,17 @@
   function updateDiagramFade(){
     if (!diagram || !hero || reduceMotion) return;
     if (window.innerWidth <= 900){ diagram.style.opacity = ''; return; }
+
     const rect = hero.getBoundingClientRect();
     const vh = window.innerHeight || document.documentElement.clientHeight;
-    const fadeIn = Math.min(Math.max((-rect.top) / 480, 0), 1);
-    const fadeOut = Math.min(Math.max(rect.bottom / (vh * 0.55), 0), 1);
-    diagram.style.opacity = Math.min(fadeIn, fadeOut).toFixed(3);
+
+    // Fully visible while Home occupies the viewport.
+    // Start fading only when the bottom of the hero approaches the middle of the screen.
+    const fadeStart = vh * 0.72;
+    const fadeEnd = vh * 0.32;
+    const opacity = (rect.bottom - fadeEnd) / (fadeStart - fadeEnd);
+
+    diagram.style.opacity = Math.min(Math.max(opacity, 0), 1).toFixed(3);
   }
 
   if (!reduceMotion) {
