@@ -94,7 +94,6 @@
     max-width:none;
     padding:170px 28px 90px;
     position:relative;
-    overflow:hidden;
   }
   .hero-inner{
     max-width:900px;
@@ -177,6 +176,22 @@
   @media (max-width:900px){
     .diagram-col{ width:260px; margin-top:20px; align-self:center; }
   }
+  /* diagram stays pinned in place, dissolving in as the page scrolls beneath it */
+  @media (min-width:901px){
+    .diagram-col{
+      position:fixed;
+      top:50%;
+      right:max(28px, calc((100vw - 900px)/2 + 8px));
+      transform:translateY(-50%);
+      opacity:0;
+      transition:opacity .12s linear;
+      z-index:3;
+      pointer-events:none;
+    }
+  }
+  @media (min-width:901px) and (prefers-reduced-motion:reduce){
+    .diagram-col{ position:static; top:auto; right:auto; transform:none; opacity:1; }
+  }
 
   /* ---------- section chrome ---------- */
   .kicker{
@@ -221,6 +236,13 @@
   }
   .entries .what h3{ margin:0 0 4px; font-size:18px; font-weight:600; }
   .entries .what p{ margin:0; color:var(--ink-soft); font-size:14.5px; line-height:1.6; }
+  .entries .what p.detail{ margin-top:6px; font-size:12.5px; line-height:1.5; }
+  .entries .what p.detail .label{
+    font-family:'EB Garamond',serif;
+    font-style:italic;
+    color:var(--gold);
+    margin-right:5px;
+  }
 
   .grid-two{
     display:grid;
@@ -274,12 +296,22 @@
 <nav class="tracker">
   <a class="logo" href="#s0" aria-label="Home">
     <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <line x1="4" y1="4" x2="20" y2="20" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
-      <line x1="20" y1="4" x2="4" y2="20" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
-      <line x1="8.5" y1="8.5" x2="11.5" y2="5.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
-      <line x1="15.5" y1="8.5" x2="12.5" y2="5.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
-      <circle cx="4" cy="4" r="1.6" fill="currentColor"/>
-      <circle cx="20" cy="4" r="1.6" fill="currentColor"/>
+      <circle cx="12" cy="12" r="4.2" stroke="currentColor" stroke-width="1.6"/>
+      <!-- down arm -->
+      <line x1="12" y1="16.2" x2="12" y2="20.4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
+      <line x1="12" y1="20.4" x2="10.3" y2="18.9" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
+      <line x1="12" y1="20.4" x2="13.7" y2="18.9" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
+      <line x1="10.3" y1="18.4" x2="13.7" y2="18.4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
+      <!-- upper-right arm -->
+      <line x1="14.8" y1="9.2" x2="18.4" y2="5.6" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
+      <line x1="18.4" y1="5.6" x2="16.2" y2="5.9" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
+      <line x1="18.4" y1="5.6" x2="18.1" y2="7.8" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
+      <line x1="15.8" y1="6.6" x2="17.4" y2="8.2" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
+      <!-- upper-left arm -->
+      <line x1="9.2" y1="9.2" x2="5.6" y2="5.6" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
+      <line x1="5.6" y1="5.6" x2="7.8" y2="5.9" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
+      <line x1="5.6" y1="5.6" x2="5.9" y2="7.8" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
+      <line x1="8.2" y1="6.6" x2="6.6" y2="8.2" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
     </svg>
   </a>
   <div class="tracker-progress">
@@ -297,7 +329,7 @@
     </div>
     <h1>Stefano Marrone</h1>
     <p class="role">Mathematician</p>
-    <p class="lede">Working towards an academic career in pure mathematics, with a growing interest in category theory, topology, algebra, and mathematical logic.</p>
+    <p class="lede">Interests in logic and category theory, AI and programming languages, and topology and algebra.</p>
     <div class="cta-row">
       <a class="cta solid" href="works.html">Projects</a>
       <a class="cta" href="mailto:m.arste@outlook.com">m.arste@outlook.com</a>
@@ -312,13 +344,13 @@
         </marker>
       </defs>
       <!-- pullback square: c -f-> x, c -> 1, x -chi-> Omega, 1 -true-> Omega -->
-      <line x1="45" y1="45" x2="205" y2="45" stroke="#e7c9a9" stroke-width="1.2" marker-end="url(#arrow-hero)"/>
-      <line x1="45" y1="55" x2="45" y2="195" stroke="#e7c9a9" stroke-width="1.2" marker-end="url(#arrow-hero)"/>
-      <line x1="205" y1="55" x2="205" y2="195" stroke="#e7c9a9" stroke-width="1.2" marker-end="url(#arrow-hero)"/>
-      <line x1="45" y1="205" x2="195" y2="205" stroke="#e7c9a9" stroke-width="1.2" marker-end="url(#arrow-hero)"/>
+      <line x1="48" y1="40" x2="202" y2="40" stroke="#e7c9a9" stroke-width="1.2" marker-end="url(#arrow-hero)"/>
+      <line x1="40" y1="48" x2="40" y2="202" stroke="#e7c9a9" stroke-width="1.2" marker-end="url(#arrow-hero)"/>
+      <line x1="210" y1="48" x2="210" y2="202" stroke="#e7c9a9" stroke-width="1.2" stroke-dasharray="4 3" marker-end="url(#arrow-hero)"/>
+      <line x1="48" y1="210" x2="202" y2="210" stroke="#e7c9a9" stroke-width="1.2" marker-end="url(#arrow-hero)"/>
 
-      <!-- pullback corner mark -->
-      <path d="M45,190 L45,205 L60,205" fill="none" stroke="#e7c9a9" stroke-width="1"/>
+      <!-- pullback corner mark, on c: this is the corner that is a pullback -->
+      <path d="M40,54 L54,54 L54,40" fill="none" stroke="#e7c9a9" stroke-width="1"/>
 
       <circle cx="40" cy="40" r="3" fill="#f1e2cf"/>
       <circle cx="210" cy="40" r="3" fill="#f1e2cf"/>
@@ -330,10 +362,9 @@
       <text x="24" y="230" fill="#f1e2cf" font-size="16">1</text>
       <text x="216" y="230" fill="#f1e2cf" font-size="16">Ω</text>
 
-      <text x="120" y="38" fill="#e7c9a9" font-size="13">f</text>
-      <text x="18" y="128" fill="#e7c9a9" font-size="13"> </text>
+      <text x="120" y="34" fill="#e7c9a9" font-size="13">f</text>
       <text x="216" y="128" fill="#e7c9a9" font-size="13">χ</text>
-      <text x="110" y="222" fill="#e7c9a9" font-size="13">true</text>
+      <text x="110" y="226" fill="#e7c9a9" font-size="13">true</text>
     </svg>
   </div>
 </header>
@@ -342,7 +373,7 @@
   <div class="kicker"><svg class="arrow" viewBox="0 0 52 14" width="48" height="14"><line x1="0" y1="7" x2="42" y2="7" marker-end="url(#arrowhead-red)"/></svg><h2>About</h2></div>
   <div class="prose fade-in">
     <p>I'm a <strong>Bachelor's student in Mathematics</strong> at the Università degli Studi di Napoli Federico II, concurrently enrolled in the Advanced Programme in Mathematics, Physics and Engineering at the <strong>Scuola Superiore Meridionale</strong>. My thesis work looks at <strong>category theory and topos theory</strong> — from the classical notions of categories and functors to naturality, universality, and elementary topoi.</p>
-    <p>Born in 2004 in Giugliano in Campania, near Naples. Outside of coursework I play piano and guitar, and volunteer occasionally in local community events.</p>
+    <p>Born in 2004 in Giugliano in Campania, near Naples. Outside of coursework I play piano and guitar, and run regularly.</p>
   </div>
 </section>
 
@@ -350,7 +381,7 @@
   <div class="kicker"><svg class="arrow" viewBox="0 0 52 14" width="48" height="14"><line x1="0" y1="7" x2="42" y2="7" marker-end="url(#arrowhead-red)"/></svg><h2>Education</h2></div>
   <ul class="entries fade-in">
     <li>
-      <div class="when">2023 – present</div>
+      <div class="when">2023 – 2026</div>
       <div class="what">
         <h3>BSc in Mathematics</h3>
         <p>Università degli Studi di Napoli Federico II</p>
@@ -360,7 +391,9 @@
       <div class="when">2023 – present</div>
       <div class="what">
         <h3>Advanced Programme in Mathematics, Physics and Engineering</h3>
-        <p>Scuola Superiore Meridionale — coursework in Advanced Topics in Analysis, Advanced Topics in Classical Physics, PDE, Differential Geometry; seminars in Number Theory.</p>
+        <p>Scuola Superiore Meridionale</p>
+        <p class="detail"><span class="label">Coursework</span>Advanced Topics in Analysis, Advanced Topics in Classical Physics, PDE, Differential Geometry, Stochastic Processes</p>
+        <p class="detail"><span class="label">Seminars</span>Number Theory</p>
       </div>
     </li>
     <li>
@@ -380,7 +413,8 @@
       <div class="when">2025</div>
       <div class="what">
         <h3>Logic Summer School</h3>
-        <p>AILA — Associazione Italiana di Logica e Applicazioni. Seminars in Recursion Theory and Model Theory.</p>
+        <p>AILA — Associazione Italiana di Logica e Applicazioni</p>
+        <p class="detail"><span class="label">Seminars</span>Recursion Theory, Model Theory</p>
       </div>
     </li>
     <li>
@@ -404,7 +438,7 @@
   <div class="kicker"><svg class="arrow" viewBox="0 0 52 14" width="48" height="14"><line x1="0" y1="7" x2="42" y2="7" marker-end="url(#arrowhead-red)"/></svg><h2>Skills &amp; Languages</h2></div>
   <div class="grid-two fade-in">
     <div>
-      <h3 style="margin:0 0 10px;font-size:17px;">Technical</h3>
+      <h3 style="margin:0 0 10px;font-size:17px;">Programming</h3>
       <div class="taglist">
         <span>LaTeX</span><span>Python</span><span>MATLAB</span>
       </div>
@@ -467,6 +501,28 @@
     });
   }, { threshold: 0.15 });
   fadeEls.forEach(el => fadeObserver.observe(el));
+
+  // diagram: stays pinned on screen while the hero scrolls past underneath it,
+  // dissolving in as the user scrolls, then dissolving back out once the hero has gone by
+  const diagram = document.querySelector('.diagram-col');
+  const hero = document.getElementById('s0');
+  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  function updateDiagramFade(){
+    if (!diagram || !hero || reduceMotion) return;
+    if (window.innerWidth <= 900){ diagram.style.opacity = ''; return; }
+    const rect = hero.getBoundingClientRect();
+    const vh = window.innerHeight || document.documentElement.clientHeight;
+    const fadeIn = Math.min(Math.max((-rect.top) / 480, 0), 1);
+    const fadeOut = Math.min(Math.max(rect.bottom / (vh * 0.55), 0), 1);
+    diagram.style.opacity = Math.min(fadeIn, fadeOut).toFixed(3);
+  }
+
+  if (!reduceMotion) {
+    window.addEventListener('scroll', updateDiagramFade, { passive: true });
+    window.addEventListener('resize', updateDiagramFade);
+    updateDiagramFade();
+  }
 </script>
 
 </body>
