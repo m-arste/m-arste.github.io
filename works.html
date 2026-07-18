@@ -57,7 +57,6 @@
     font-size:12px; letter-spacing:0.14em; text-transform:uppercase; color:#e7c9a9; margin:0 0 12px;
   }
   .page-head h1{ font-size:clamp(34px,6vw,52px); margin:0 0 10px; }
-  .page-head p{ font-size:16px; line-height:1.7; max-width:56ch; color:#efe1cd; margin:0; }
 
   main{ max-width:760px; margin:0 auto; padding:60px 28px 100px; }
 
@@ -74,10 +73,6 @@
   }
   .work h2{ font-size:21px; margin:0 0 8px; }
   .work p{ margin:0 0 6px; color:var(--ink-soft); line-height:1.7; font-size:15px; }
-  .work .tag{
-    display:inline-block; font-size:12px; color:var(--ink-soft);
-    border:1px solid var(--line); border-radius:2px; padding:3px 9px; margin-top:6px;
-  }
   .work-link{
     display:inline-block;
     margin-top:14px;
@@ -120,12 +115,19 @@
 <nav class="tracker">
   <a class="logo" href="index.html" aria-label="Home">
     <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <line x1="4" y1="4" x2="20" y2="20" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
-      <line x1="20" y1="4" x2="4" y2="20" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
-      <line x1="8.5" y1="8.5" x2="11.5" y2="5.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
-      <line x1="15.5" y1="8.5" x2="12.5" y2="5.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
-      <circle cx="4" cy="4" r="1.6" fill="currentColor"/>
-      <circle cx="20" cy="4" r="1.6" fill="currentColor"/>
+      <circle cx="12" cy="12" r="4.2" stroke="currentColor" stroke-width="1.6"/>
+      <line x1="12" y1="16.2" x2="12" y2="20.4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
+      <line x1="12" y1="20.4" x2="10.3" y2="18.9" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
+      <line x1="12" y1="20.4" x2="13.7" y2="18.9" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
+      <line x1="10.3" y1="18.4" x2="13.7" y2="18.4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
+      <line x1="14.8" y1="9.2" x2="18.4" y2="5.6" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
+      <line x1="18.4" y1="5.6" x2="16.2" y2="5.9" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
+      <line x1="18.4" y1="5.6" x2="18.1" y2="7.8" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
+      <line x1="15.8" y1="6.6" x2="17.4" y2="8.2" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
+      <line x1="9.2" y1="9.2" x2="5.6" y2="5.6" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
+      <line x1="5.6" y1="5.6" x2="7.8" y2="5.9" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
+      <line x1="5.6" y1="5.6" x2="5.9" y2="7.8" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
+      <line x1="8.2" y1="6.6" x2="6.6" y2="8.2" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
     </svg>
   </a>
   <a class="back" href="index.html">← Home</a>
@@ -143,18 +145,15 @@
     <div class="when">2025/2026</div>
     <div>
       <h2>Category Theory and Topos Theory</h2>
-      <p>Bachelor's thesis, Università degli Studi di Napoli Federico II. Supervisor: Prof. Giovanni Cutolo.</p>
-      <p>An introduction to the basic ideas of Category Theory, a further exploration of Universality,
-        and then a short survey on the concept of Elementary Topos and its foundational implication.</p>
-
-      <!-- Replace the filename below with the exact name of your PDF. -->
-      <br>
-      <a class="work-link" href="files/thesis.pdf" target="_blank" rel="noopener">Read the thesis</a>
+      <p>Bachelor's thesis, Università Federico II.
+         Supervisor: Prof. Giovanni Cutolo.</p>
+      <p>An introduction to the basic ideas of category theory, a deeper look at universality, and a short survey of elementary topoi and their foundational implications.</p>
+      <a class="work-link" href="thesis.pdf" target="_blank" rel="noopener">Read</a>
     </div>
   </div>
 
   <div class="empty-note">
-    Further projects, notes, and seminar materials will be added as my work develops.
+    Further projects, notes, and seminar materials will be added.
   </div>
 </main>
 
