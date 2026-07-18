@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Projects</title>
-<meta name="description" content="Tesi, progetti e scritti di Stefano Marrone.">
+<meta name="description" content="Thesis, projects, and writings by Stefano Marrone.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
@@ -78,6 +78,21 @@
     display:inline-block; font-size:12px; color:var(--ink-soft);
     border:1px solid var(--line); border-radius:2px; padding:3px 9px; margin-top:6px;
   }
+  .work-link{
+    display:inline-block;
+    margin-top:14px;
+    padding:8px 14px;
+    border:1px solid var(--maroon);
+    border-radius:2px;
+    color:var(--maroon);
+    font-size:13px;
+    text-decoration:none;
+    transition:background .2s, color .2s;
+  }
+  .work-link:hover{
+    background:var(--maroon);
+    color:var(--paper);
+  }
 
   .empty-note{
     margin-top:20px;
@@ -93,6 +108,10 @@
     max-width:760px; margin:0 auto; padding:20px 28px 80px;
     display:flex; justify-content:space-between; align-items:center;
     color:var(--ink-soft); font-size:12.5px; letter-spacing:0.04em;
+  }
+
+  @media (max-width:600px){
+    .work{ grid-template-columns:1fr; gap:8px; }
   }
 </style>
 </head>
@@ -115,8 +134,8 @@
 <header class="page-head">
   <div class="page-head-inner">
     <p class="eyebrow">Stefano Marrone</p>
-    <h1>Lavori</h1>
-    <p>Tesi, seminari e progetti a cui ho lavorato durante il mio percorso in Matematica.</p>
+    <h1>Projects</h1>
+    <p>Theses, seminars, and projects developed throughout my studies in Mathematics.</p>
   </div>
 </header>
 
@@ -124,24 +143,19 @@
   <div class="work">
     <div class="when">2025/2026</div>
     <div>
-      <h2>Teoria delle Categorie e Teoria dei Topoi</h2>
-      <p>Tesi di laurea triennale, Università degli Studi di Napoli Federico II. Relatore: Prof. Giovanni Cutolo.</p>
-      <p>Un percorso attraverso i concetti classici della teoria delle categorie — categorie, funtori, naturalità e universalità — fino a una digressione sui tòpoi elementari, a partire dalla domanda di Eilenberg e Mac Lane sull'isomorfismo naturale tra uno spazio vettoriale e il suo doppio duale.</p>
-      <span class="tag">Matematica pura · Fondamenti</span>
-    </div>
-  </div>
+      <h2>Category Theory and Topos Theory</h2>
+      <p>Bachelor's thesis, Università degli Studi di Napoli Federico II. Supervisor: Prof. Giovanni Cutolo.</p>
+      <p>An introduction to the classical ideas of category theory—including categories, functors, naturality, and universality—followed by an exploration of elementary topoi. The discussion begins with Eilenberg and Mac Lane's question concerning the natural isomorphism between a vector space and its double dual.</p>
+      <span class="tag">Pure Mathematics · Foundations</span>
 
-  <div class="work">
-    <div class="when">2025</div>
-    <div>
-      <h2>Logic Summer School</h2>
-      <p>AILA — Associazione Italiana di Logica e Applicazioni. Seminari su Teoria della Ricorsione e Teoria dei Modelli.</p>
-      <span class="tag">Logica matematica</span>
+      <!-- Replace the filename below with the exact name of your PDF. -->
+      <br>
+      <a class="work-link" href="files/thesis.pdf" target="_blank" rel="noopener">Read the thesis</a>
     </div>
   </div>
 
   <div class="empty-note">
-    Altri lavori, appunti e seminari verranno aggiunti qui man mano che il percorso prosegue.
+    Further projects, notes, and seminar materials will be added as my work develops.
   </div>
 </main>
 
